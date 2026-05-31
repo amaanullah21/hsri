@@ -49,10 +49,9 @@ If you use this index in your research or policy analysis, please cite the origi
 
 Feel free to reach out for collaborations, academic inquiries, or feedback on the HSRI model.
 
-*   **Personal Website:** [yourwebsite.com](https://yourwebsite.com)
-*   **LinkedIn:** [linkedin.com/in/yourusername](https://linkedin.com/in/yourusername)
-*   **GitHub:** [@yourusername](https://github.com/yourusername)
-*   **Email:** [amaanullahbhatti@outlook.com](mailto:amaanullahbhatti@outlook.com)
+*   **Personal Website:** [https://amaanullah21.github.io/portfolio/](https://amaanullah21.github.io/portfolio/)
+*   **LinkedIn:** [linkedin.com/in/amaanullah-bhatti](https://linkedin.com/in/amaanullah-bhatti)
+*   **GitHub:** [@amaanullah21](https://github.com/amaanullah21)
 
 ---
 *Disclaimer: This tool is intended for research and educational purposes. Economic forecasting involves inherent risks, and HSRI should be used in conjunction with other qualitative and quantitative indicators.*
