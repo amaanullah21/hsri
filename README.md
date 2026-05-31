@@ -1,7 +1,3 @@
-This is a professional, comprehensive `README.md` file designed for your GitHub repository. It presents your research with academic rigor while explaining the technical side of the web tool.
-
-***
-
 # Hafzan’s Stagflation Resilience Index (HSRI) Calculator
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
@@ -39,16 +35,6 @@ $$HSRI = \frac{\text{Productivity Growth} \times \text{Money Velocity}}{\text{Un
 | **2.00 – 5.00** | 🔵 Elite | Exceptional resilience and high adaptability. |
 | **> 5.00** | 🟣 Outlier | Potential "Overheating" or unsustainable monetary velocity. |
 
-## 🛠️ Installation & Usage
-
-Since this is a client-side web application, no server-side installation is required.
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/yourusername/HSRI-Calculator.git
-    ```
-2.  **Open the Tool:**
-    Open `index.html` in any modern web browser (Chrome, Firefox, Safari, Edge).
 
 ## 📝 Research Attribution
 
