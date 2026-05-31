@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSRI | Hafzan’s Stagflation Resilience Index</title>
+    <!-- Fonts and Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #002147; /* Oxford Blue */
+            --accent-blue: #0056b3;
+            --success-green: #1b5e20;
+            --warning-orange: #e65100;
+            --danger-red: #b71c1c;
+            --light-gray: #f8f9fa;
+            --text-main: #2c3e50;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-main);
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Professional Header --- */
+        .main-header {
+            background: var(--primary-dark);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-blue);
+        }
+
+        .main-header h1 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+
+        .main-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-weight: 300;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 40px;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Formula Section --- */
+        .formula-display {
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid #dee2e6;
+        }
+
+        .formula-math {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--primary-dark);
+        }
+
+        /* --- Calculator Grid --- */
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .input-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+        }
+
+        input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--accent-blue);
+            outline: none;
+        }
+
+        .calc-btn {
+            grid-column: 1 / -1;
+            background: var(--primary-dark);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calc-btn:hover {
+            background: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        /* --- Results Area --- */
+        .result-card {
+            display: none;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .score-large {
+            font-size: 3.5rem;
+            font-weight: 800;
+            display: block;
+            margin: 10px 0;
+        }
+
+        /* --- Range Guide --- */
+        .range-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+        }
+
+        .range-table th, .range-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .range-table tr:hover { background: #fcfcfc; }
+
+        .tag {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* --- Footer --- */
+        .main-footer {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            margin-top: 60px;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-branding h3 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <p>Macroeconomic Framework</p>
+    <h1>Hafzan’s Stagflation Resilience Index (HSRI)</h1>
+</header>
+
+<div class="container">
+    <!-- Introduction Section -->
+    <section>
+        <p>The <strong>HSRI</strong> is a novel composite measure designed to evaluate a nation's capacity to withstand stagflationary pressures by integrating labor market dynamics and monetary flow theory.</p>
+        
+        <div class="formula-display">
+            <div class="formula-math">
+                HSRI = (Productivity Growth &times; Money Velocity) / (Unemployment Rate &times; Inflation Rate)
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calc-section">
+        <div class="calc-grid">
+            <div class="input-box">
+                <label>Productivity Growth (%)</label>
+                <input type="number" id="prod" step="0.1" placeholder="Annual % change">
+            </div>
+            <div class="input-box">
+                <label>Money Velocity (M2)</label>
+                <input type="number" id="vel" step="0.01" placeholder="Ratio GDP/M2">
+            </div>
+            <div class="input-box">
+                <label>Unemployment Rate (%)</label>
+                <input type="number" id="unemp" step="0.1" placeholder="Current %">
+            </div>
+            <div class="input-box">
+                <label>Inflation Rate (%)</label>
+                <input type="number" id="inf" step="0.1" placeholder="CPI Year-over-Year">
+            </div>
+            <button class="calc-btn" onclick="runAnalysis()">Calculate Resilience Score</button>
+        </div>
+
+        <div id="resultBox" class="result-card">
+            <h3 id="statusText">Resilience Score</h3>
+            <span id="scoreVal" class="score-large">0.00</span>
+            <p id="descText"></p>
+        </div>
+    </section>
+
+    <!-- Range Explanation -->
+    <section style="margin-top: 50px;">
+        <h3>Understanding the Ranges</h3>
+        <p>How should we interpret the HSRI score? Because this index is a ratio of growth drivers vs. economic stressors, the following benchmarks apply:</p>
+        
+        <table class="range-table">
+            <thead>
+                <tr style="background: var(--light-gray);">
+                    <th>HSRI Range</th>
+                    <th>Classification</th>
+                    <th>Economic Meaning</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>&lt; 0.10</strong></td>
+                    <td><span class="tag" style="background: var(--danger-red);">Critical</span></td>
+                    <td>Active stagflation. The economy has no "buffer" to protect against price and job shocks.</td>
+                </tr>
+                <tr>
+                    <td><strong>0.10 &ndash; 0.50</strong></td>
+                    <td><span class="tag" style="background: var(--warning-orange);">Vulnerable</span></td>
+                    <td>Normal but fragile. Growth and velocity are barely keeping pace with stressors.</td>
+                </tr>
+                <tr>
+                    <td><strong>0.50 &ndash; 2.00</strong></td>
+                    <td><span class="tag" style="background: var(--success-green);">Resilient</span></td>
+                    <td>Healthy adaptability. Typical of stable, productive economies.</td>
+                </tr>
+                <tr>
+                    <td><strong>&gt; 2.00</strong></td>
+                    <td><span class="tag" style="background: var(--accent-blue);">Elite / Outlier</span></td>
+                    <td>Exceptional resilience. Usually found in hyper-productive phases or tech booms.</td>
+                </tr>
+                <tr>
+                    <td><strong>&gt; 5.00</strong></td>
+                    <td><span class="tag" style="background: #333;">Overheating?</span></td>
+                    <td><strong>"Too High":</strong> While high resilience is good, a score above 5.0 may indicate an outlier. It could mean money velocity is unsustainably fast or inflation is near-zero, which might signal a different risk (deflationary trap).</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<footer class="main-footer">
+    <div class="footer-branding">
+        <p style="margin-bottom: 5px; color: #777;">Developed by</p>
+        <h3>Amaanullah Bhatti (Hafzan Osmanoğlu)</h3>
+        <p style="font-size: 0.8rem;">Macroeconomist & Researcher</p>
+    </div>
+
+    <div class="social-links">
+        <!-- Personal Website -->
+        <a href="https://amaanullah21.github.io/portfolio/" target="_blank" title="Personal Website"><i class="fas fa-globe"></i></a>
+        <!-- GitHub -->
+        <a href="https://github.com/amaanullah21" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/amaanullah-bhatti" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <!-- Email -->
+        <a href="mailto:amaanullahbhatti@outlook.com"><i class="fas fa-envelope"></i></a>
+    </div>
+    
+    <p style="font-size: 0.75rem; color: #999;">ORCID: https://orcid.org/0009-0000-6922-0739<br>
+    © 2025 Hafzan Stagflation Resilience Index. All rights reserved.</p>
+</footer>
+
+<script>
+    function runAnalysis() {
+        const p = parseFloat(document.getElementById('prod').value);
+        const v = parseFloat(document.getElementById('vel').value);
+        const u = parseFloat(document.getElementById('unemp').value);
+        const i = parseFloat(document.getElementById('inf').value);
+
+        if (!p || !v || !u || !i) {
+            alert("Please fill in all economic indicators.");
+            return;
+        }
+
+        // HSRI Formula
+        const score = (p * v) / (u * i);
+        
+        const box = document.getElementById('resultBox');
+        const scoreDisplay = document.getElementById('scoreVal');
+        const status = document.getElementById('statusText');
+        const desc = document.getElementById('descText');
+
+        box.style.display = 'block';
+        scoreDisplay.innerText = score.toFixed(3);
+
+        // Interpretation Logic
+        if (score < 0.1) {
+            box.style.backgroundColor = '#ffebee';
+            scoreDisplay.style.color = 'var(--danger-red)';
+            status.innerText = "Classification: Critical Vulnerability";
+            desc.innerText = "The economy is likely in a stagflationary spiral where structural output cannot compensate for monetary instability.";
+        } else if (score < 0.5) {
+            box.style.backgroundColor = '#fff3e0';
+            scoreDisplay.style.color = 'var(--warning-orange)';
+            status.innerText = "Classification: Vulnerable";
+            desc.innerText = "The economy has moderate adaptability but is highly sensitive to external supply shocks.";
+        } else if (score <= 2.0) {
+            box.style.backgroundColor = '#e8f5e9';
+            scoreDisplay.style.color = 'var(--success-green)';
+            status.innerText = "Classification: High Resilience";
+            desc.innerText = "Strong macroeconomic foundations. Productivity and monetary flow effectively neutralize inflation/unemployment pressures.";
+        } else if (score <= 5.0) {
+            box.style.backgroundColor = '#e3f2fd';
+            scoreDisplay.style.color = 'var(--accent-blue)';
+            status.innerText = "Classification: Exceptional Resilience";
+            desc.innerText = "Superior economic adaptability. The nation is exceptionally well-positioned to navigate stagflationary environments.";
+        } else {
+            box.style.backgroundColor = '#f3e5f5';
+            scoreDisplay.style.color = '#7b1fa2';
+            status.innerText = "Classification: Structural Outlier";
+            desc.innerText = "Warning: Score is extremely high. This may indicate an overheating economy or unsustainable velocity levels. Further investigation of the money supply is recommended.";
+        }
+    }
+</script>
+
+</body>
+</html>
